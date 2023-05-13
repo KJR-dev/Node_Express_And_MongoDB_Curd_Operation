@@ -1,0 +1,85 @@
+<%- include('./partials/header.ejs') %>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-6 mt-4">
+      <h1 class="bg-success text-center">Student Form</h1>
+      <form method="post">
+        <input
+          type="text"
+          class="form-control mt-4"
+          placeholder="Enter Your Name"
+          aria-label="First name"
+          name="name"
+        />
+        <input
+          type="number"
+          class="form-control mt-4"
+          placeholder="Enter Your Age"
+          aria-label="First name"
+          min="18"
+          max="60"
+          name="age"
+        />
+        <input
+          type="number"
+          class="form-control mt-4"
+          placeholder="Enter Fees"
+          aria-label="First name"
+          min="5000"
+          name="fees"
+        />
+        <button type="submit" class="btn btn-primary mt-4">Create</button>
+      </form>
+    </div>
+    <!-- All student data fetched from database -->
+    <div class="col-sm-6 mt-4 text-center">
+      <h1 class="bg-warning">All Students</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Fees</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var i=1; %> <% data.forEach((student) => { %>
+
+          <tr>
+            <td><%= i++ %></td>
+            <td><%= student.name %></td>
+            <td><%= student.age %></td>
+            <td><%= student.fees %></td>
+            <td>
+              <form
+                action="/student/edit/<%= student._id %>"
+                method="get"
+                class="d-inline"
+              >
+                <button class="btn" type="submit">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+              </form>
+              
+              <form
+                action="/student/delete/<%= student._id %>"
+                method="get"
+                class="d-inline"
+              >
+              <button class="btn" type="submit">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+              </form>
+              
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include('./partials/footer.ejs') %>
