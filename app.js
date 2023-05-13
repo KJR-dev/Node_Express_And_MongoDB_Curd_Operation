@@ -3,7 +3,7 @@ import connectDB from "./db/connection.js";
 import web from "./routes/web.js";
 import { join } from "path";
 const app = express();
-const port = `https://nodecurd.netlify.app`;
+const port = process.env.PORT || "3000";
 const DATABASE_URL = process.env.DATABASE_URL || "mongodb://localhost:27017";
 
 /* connection to a MongoDB database */
@@ -21,5 +21,5 @@ app.set("view engine", "ejs");
 app.use("/student", web);
 
 app.listen(port, () => {
-  console.log(`server listening at https://nodecurd.netlify.app`);
+  console.log(`server listening at http://localhost:${port}`);
 });
